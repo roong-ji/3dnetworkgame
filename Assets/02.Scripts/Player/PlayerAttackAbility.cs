@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,6 +46,14 @@ public class PlayerAttackAbility : PlayerAbility
                 break;
         }
         
+        PlayAttackAnimation(animationNumber);
+        
+        _owner.PhotonView.RPC(nameof(PlayAttackAnimation), RpcTarget.Others, animationNumber);
+    }
+
+    [PunRPC]
+    private void PlayAttackAnimation(int animationNumber)
+    {
         _animator.SetTrigger($"Attack{animationNumber}");
     }
 }

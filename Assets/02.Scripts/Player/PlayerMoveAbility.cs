@@ -60,11 +60,11 @@ public class PlayerMoveAbility : PlayerAbility
         if (_isDashPressed && _owner.Stat.Stamina > 0f)
         {
             currentSpeed = _owner.Stat.RunSpeed;
-            _owner.Stat.Stamina -= Time.deltaTime * 20f;
+            _owner.Stat.Stamina -= Time.deltaTime * 5f;
         }
         else
         {
-            _owner.Stat.Stamina += Time.deltaTime * 20f;
+            _owner.Stat.Stamina += Time.deltaTime * 2f;
         }
 
         _owner.Stat.Stamina = Mathf.Clamp(_owner.Stat.Stamina, 0f, _owner.Stat.MaxStamina);

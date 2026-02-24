@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IPunObservable
+public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 {
     public PhotonView PhotonView;
     public PlayerStat Stat;
@@ -52,5 +52,16 @@ public class PlayerController : MonoBehaviour, IPunObservable
         _abilitiesCache[ability.GetType()] = ability;
 
         return ability as T;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (Stat.Health <= 0f) return;
+        Stat.Health -= damage;
+        
+        if (Stat.Health <= 0f)
+        {
+            Debug.Log("사망");
+        }
     }
 }
