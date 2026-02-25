@@ -68,14 +68,14 @@ ModelImporter:
       - time: 0.22325584
         functionName: ActiveCollider
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 6035694875690329448, guid: 280756ecb6b03f24aabea72e937cbda8, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.44195804
         functionName: DeActiveCollider
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 6035694875690329448, guid: 280756ecb6b03f24aabea72e937cbda8, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

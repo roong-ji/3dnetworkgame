@@ -4,12 +4,12 @@ public class PlayerWeaponColliderAbility : PlayerAbility
 {
     [SerializeField] private Collider _collider;
 
-    private void ActiveCollider()
+    public void ActiveCollider()
     {
         _collider.enabled = true;
     }
 
-    private void DeActiveCollider()
+    public void DeActiveCollider()
     {
         _collider.enabled = false;
     }
