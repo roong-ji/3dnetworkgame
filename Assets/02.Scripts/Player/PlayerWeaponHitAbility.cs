@@ -11,8 +11,10 @@ public class PlayerWeaponHitAbility : PlayerAbility
         
         if (!other.TryGetComponent<IDamageable>(out var damageable)) return;
         
+        var actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+        
         var otherPlayer = other.GetComponent<PlayerController>();
-        otherPlayer.PhotonView.RPC(nameof(damageable.TakeDamage), RpcTarget.All, _owner.Stat.AttackPower);
+        otherPlayer.PhotonView.RPC(nameof(damageable.TakeDamage), RpcTarget.All, _owner.Stat.AttackPower, actorNumber);
 
         _owner.GetAbility<PlayerWeaponColliderAbility>().DeActiveCollider();
     }

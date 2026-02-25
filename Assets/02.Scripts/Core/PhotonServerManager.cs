@@ -45,25 +45,6 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
     }
 
-    // 방 입장 성공 시 호출되는 콜백 함수
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("룸 입장 완료!");
-        
-        Debug.Log(PhotonNetwork.CurrentRoom.Name);
-        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-        
-        var roomPlayers = PhotonNetwork.CurrentRoom.Players;
-        foreach (var player in roomPlayers)
-        {
-            Debug.Log($"{player.Value.NickName} : {player.Value.ActorNumber}");
-        }
-
-        // 리소스 폴더에서 프리팹을 찾아 생성, 다른 방법이 더 좋음
-        var startPos = SpawnPoint.GetRandomPosition();
-        PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
-    }
-
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log($"랜덤 방 입장에 실패했습니다: {returnCode} - {message}");

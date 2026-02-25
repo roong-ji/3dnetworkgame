@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     private void Die()
     {
         Stat.IsDead = true;
-        if (_animator != null) _animator.SetTrigger("Die");
+        _animator.SetTrigger("Die");
         
         if (PhotonView.IsMine)
         {
@@ -116,17 +116,15 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     }
 
     [PunRPC]
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, int attackActorNubmer)
     {
         if (Stat.IsDead) return;
-        if (Stat.Health <= 0f) return;
-        
+
         Stat.Health -= damage;
+
+        if (Stat.Health > 0f) return;
         
-        if (Stat.Health <= 0f)
-        {
-            Debug.Log("사망");
-            Die();
-        }
+        PhotonRoomManager.Instance.OnPlayerDeath(attackActorNubmer);
+        Die();
     }
 }
