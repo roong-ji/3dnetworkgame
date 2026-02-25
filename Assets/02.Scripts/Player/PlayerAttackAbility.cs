@@ -18,7 +18,7 @@ public class PlayerAttackAbility : PlayerAbility
 
     public void OnAttack(InputValue value)
     {
-        if (!_owner.PhotonView.IsMine || !value.isPressed) return;
+        if (!_owner.PhotonView.IsMine || !value.isPressed || _owner.Stat.IsDead) return;
         Attack();
     }
     

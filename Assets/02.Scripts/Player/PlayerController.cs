@@ -8,9 +8,70 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     public PhotonView PhotonView;
     public PlayerStat Stat;
 
+    private Animator _animator;
+    private CharacterController _characterController;
+
     private void Awake()
     {
         PhotonView = GetComponent<PhotonView>();
+        _animator = GetComponent<Animator>();
+        _characterController = GetComponent<CharacterController>();
+    }
+
+    private void Update()
+    {
+        if (!PhotonView.IsMine) return;
+        
+        if (!Stat.IsDead && transform.position.y < -10f)
+        {
+            PhotonView.RPC(nameof(RpcDieFromFall), RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    private void RpcDieFromFall()
+    {
+        if (Stat.IsDead) return;
+        Stat.Health = 0f;
+        Die();
+    }
+
+    private void Die()
+    {
+        Stat.IsDead = true;
+        if (_animator != null) _animator.SetTrigger("Die");
+        
+        if (PhotonView.IsMine)
+        {
+            Invoke(nameof(Respawn), 5f);
+        }
+    }
+
+    private void Respawn()
+    {
+        PhotonView.RPC(nameof(RpcRespawn), RpcTarget.All, SpawnPoint.GetRandomPosition());
+    }
+
+    [PunRPC]
+    private void RpcRespawn(Vector3 respawnPosition)
+    {
+        Stat.IsDead = false;
+        Stat.Health = Stat.MaxHealth;
+        Stat.Stamina = Stat.MaxStamina;
+
+        if (_animator != null) _animator.Play("Idle");
+
+        if (_characterController != null)
+        {
+            // CharacterController가 활성화되어 있으면 transform.position 변경이 무시될 수 있으므로 잠시 껐다 켭니다.
+            _characterController.enabled = false;
+            transform.position = respawnPosition;
+            _characterController.enabled = true;
+        }
+        else
+        {
+            transform.position = respawnPosition;
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -57,12 +118,15 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     [PunRPC]
     public void TakeDamage(float damage)
     {
+        if (Stat.IsDead) return;
         if (Stat.Health <= 0f) return;
+        
         Stat.Health -= damage;
         
         if (Stat.Health <= 0f)
         {
             Debug.Log("사망");
+            Die();
         }
     }
 }

@@ -28,6 +28,7 @@ public class PlayerMoveAbility : PlayerAbility
     
     public void OnJump(InputValue value)
     {
+        if (_owner.Stat.IsDead) return;
         if (!value.isPressed || !_characterController.isGrounded) return;
         _yVelocity = _owner.Stat.JumpPower;
     }
@@ -39,7 +40,7 @@ public class PlayerMoveAbility : PlayerAbility
     
     private void Update()
     {
-        if (!_owner.PhotonView.IsMine) return;
+        if (!_owner.PhotonView.IsMine || _owner.Stat.IsDead) return;
 
         var h = _moveInput.x;
         var v = _moveInput.y;

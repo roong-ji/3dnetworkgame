@@ -60,7 +60,8 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
         }
 
         // 리소스 폴더에서 프리팹을 찾아 생성, 다른 방법이 더 좋음
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        var startPos = SpawnPoint.GetRandomPosition();
+        PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)

@@ -13,4 +13,5 @@ public class PlayerStat
     public float Stamina;
     public float MaxStamina;
     public float AttackPower;
+    public bool IsDead;
 }
