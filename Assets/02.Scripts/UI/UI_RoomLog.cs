@@ -9,7 +9,7 @@ public class UI_RoomLog : MonoBehaviour
 
     private void Start()
     {
-        _logText.text = "You Enter the room.";
+        _logText.text = "You Enter the room.\n";
         
         PhotonRoomManager.Instance.OnPlayerEntered += OnPlayerEnter;
         PhotonRoomManager.Instance.OnPlayerLeft += OnPlayerLeft;
@@ -36,6 +36,6 @@ public class UI_RoomLog : MonoBehaviour
 
     private void PlayerDeathLog(string attackerNickName, string victimNickName)
     {
-        _logText.text += $"{attackerNickName} Killed {victimNickName}";
+        _logText.text += $"{attackerNickName} Killed {victimNickName}\n";
     }
 }

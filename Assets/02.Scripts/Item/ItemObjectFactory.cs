@@ -34,7 +34,9 @@ public class ItemObjectFactory : MonoBehaviour
         
         for (int i = 0; i < randomCount; i++)
         {
-            PhotonNetwork.InstantiateRoomObject("ScoreItem", makePosition, Quaternion.identity);
+            var randomOffset = Random.insideUnitSphere;
+            randomOffset.y = 0;
+            PhotonNetwork.InstantiateRoomObject("ScoreItem", makePosition + randomOffset, Quaternion.identity);
         }
     }
 

@@ -4821,11 +4821,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2711321641365748022}
-  - component: {fileID: 3797443214822909108}
+  - component: {fileID: 7477479785110283512}
   - component: {fileID: 6005729898003334737}
   - component: {fileID: 7936218467532610769}
   - component: {fileID: 8070394435010335578}
   - component: {fileID: -4566591353537067241}
+  - component: {fileID: -7834799852799632436}
   m_Layer: 0
   m_Name: ScoreItem
   m_TagString: ScoreItem
@@ -4850,7 +4851,7 @@ Transform:
   - {fileID: 1213398691470749286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3797443214822909108
+--- !u!135 &7477479785110283512
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4954,6 +4955,18 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 1
+--- !u!114 &-7834799852799632436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368243917488226584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3a1fe2a28cfda4c9b3c05ec6a5ecf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemObject
 --- !u!1 &6287172647706146337
 GameObject:
   m_ObjectHideFlags: 0

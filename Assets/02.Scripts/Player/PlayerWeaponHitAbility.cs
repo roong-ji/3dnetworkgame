@@ -5,7 +5,7 @@ public class PlayerWeaponHitAbility : PlayerAbility
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (_owner.PhotonView.IsMine) return;
+        if (!_owner.PhotonView.IsMine) return;
         
         if (other.transform == _owner.transform) return;
         

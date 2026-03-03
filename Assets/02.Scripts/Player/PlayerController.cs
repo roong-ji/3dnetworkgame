@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         Stat.IsDead = false;
         Stat.Health = Stat.MaxHealth;
         Stat.Stamina = Stat.MaxStamina;
-        Stat.Score = 0;
 
         _animator.Rebind();
         
@@ -118,10 +117,11 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 
         if (Stat.Health > 0f) return;
         
-        PhotonRoomManager.Instance.OnPlayerDeath(attackActorNubmer);
+        var victimNickname = PhotonView.Owner.NickName;
+        PhotonRoomManager.Instance.OnPlayerDeath(attackActorNubmer, victimNickname);
         if (PhotonView.IsMine)
         {
-            ItemObjectFactory.Instance.RequestMakeScoreItems(transform.position + new Vector3(0, 1, 0));
+            ItemObjectFactory.Instance.RequestMakeScoreItems(transform.position);
         }
         Die();
     }
