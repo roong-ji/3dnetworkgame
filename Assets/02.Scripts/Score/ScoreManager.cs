@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public static ScoreManager Instance;
     
     private int _score;
+    public int Score => _score;
     
     private Dictionary<int, ScoreData> _scores = new();
     public IReadOnlyDictionary<int, ScoreData> Scores => _scores;
