@@ -830,7 +830,6 @@ GameObject:
   - component: {fileID: 5537712760393915919}
   - component: {fileID: 4439948985042592463}
   - component: {fileID: 8464107470897862045}
-  - component: {fileID: 8407217064565944991}
   m_Layer: 0
   m_Name: OHS03
   m_TagString: Untagged
@@ -973,27 +972,10 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8407217064565944991}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8407217064565944991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2366818110990235022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonTransformView
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
 --- !u!1 &2442406684475918967
 GameObject:
   m_ObjectHideFlags: 0

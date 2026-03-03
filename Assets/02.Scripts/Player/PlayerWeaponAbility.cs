@@ -1,25 +1,24 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
-public class PlayerWeaponAbility : PlayerAbility
+public class PlayerWeaponAbility : MonoBehaviourPunCallbacks
 {
     private void Start()
     {
-        if (!TryGetComponent(out PhotonView photonView) || !photonView.IsMine) return;
-        
-        ScoreManager.Instance.OnDataChanged += Refresh;
-        Refresh();
+        if (!photonView.Owner.CustomProperties.TryGetValue("score", out var scoreObj)) return;
+        UpdateScale((int)scoreObj);
     }
 
-    private void OnDestroy()
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        if (!TryGetComponent(out PhotonView photonView) || !photonView.IsMine) return;
-        ScoreManager.Instance.OnDataChanged -= Refresh;
+        if (!changedProps.ContainsKey("score") || targetPlayer.ActorNumber != photonView.OwnerActorNr) return;
+        UpdateScale((int)changedProps["score"]);
     }
 
-    private void Refresh()
+    private void UpdateScale(int score)
     {
-        var score = ScoreManager.Instance.Score;
         var factor = 1 + score / 2000f;
         transform.localScale = new Vector3(factor, factor, factor);
     }
