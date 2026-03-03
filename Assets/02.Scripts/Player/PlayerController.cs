@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     {
         Stat.IsDead = true;
         _animator.SetTrigger("Die");
+        _characterController.enabled = false;
         
         if (PhotonView.IsMine)
         {
@@ -59,20 +60,12 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         Stat.IsDead = false;
         Stat.Health = Stat.MaxHealth;
         Stat.Stamina = Stat.MaxStamina;
+        Stat.Score = 0;
 
-        if (_animator != null) _animator.Play("Idle");
-
-        if (_characterController != null)
-        {
-            // CharacterController가 활성화되어 있으면 transform.position 변경이 무시될 수 있으므로 잠시 껐다 켭니다.
-            _characterController.enabled = false;
-            transform.position = respawnPosition;
-            _characterController.enabled = true;
-        }
-        else
-        {
-            transform.position = respawnPosition;
-        }
+        _animator.Rebind();
+        
+        transform.position = respawnPosition;
+        _characterController.enabled = true;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -128,17 +121,8 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         PhotonRoomManager.Instance.OnPlayerDeath(attackActorNubmer);
         if (PhotonView.IsMine)
         {
-            MakeScoreItems();
+            ItemObjectFactory.Instance.RequestMakeScoreItems(transform.position + new Vector3(0, 1, 0));
         }
         Die();
-    }
-
-    private void MakeScoreItems()
-    {
-        var randomCount = UnityEngine.Random.Range(3, 5);
-        for (var i = 0; i < randomCount; ++i)
-        {
-            PhotonNetwork.Instantiate("ScoreItem", transform.position, Quaternion.identity);
-        }
     }
 }

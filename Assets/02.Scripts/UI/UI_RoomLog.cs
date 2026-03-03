@@ -13,7 +13,7 @@ public class UI_RoomLog : MonoBehaviour
         
         PhotonRoomManager.Instance.OnPlayerEntered += OnPlayerEnter;
         PhotonRoomManager.Instance.OnPlayerLeft += OnPlayerLeft;
-        PhotonRoomManager.Instance.OnPlayerDeathed += PlayerDeathLog;
+        PhotonRoomManager.Instance.OnPlayerDied += PlayerDeathLog;
     }
 
     private void OnDestroy()
@@ -21,7 +21,7 @@ public class UI_RoomLog : MonoBehaviour
         if (PhotonRoomManager.Instance == null) return;
         PhotonRoomManager.Instance.OnPlayerEntered -= OnPlayerEnter;
         PhotonRoomManager.Instance.OnPlayerLeft -= OnPlayerLeft;
-        PhotonRoomManager.Instance.OnPlayerDeathed -= PlayerDeathLog;
+        PhotonRoomManager.Instance.OnPlayerDied -= PlayerDeathLog;
     }
 
     private void OnPlayerEnter(Player player)

@@ -18,8 +18,6 @@ public class PlayerRotateAbility : PlayerAbility
 
     private void Start()
     {
-        Debug.Log(_owner.PhotonView.IsMine);
-        
         if (!_owner.PhotonView.IsMine) return;
 
         Cursor.lockState = CursorLockMode.Locked;
