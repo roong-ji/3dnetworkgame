@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using Random = System.Random;
 
 public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
 {
@@ -125,6 +126,19 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         if (Stat.Health > 0f) return;
         
         PhotonRoomManager.Instance.OnPlayerDeath(attackActorNubmer);
+        if (PhotonView.IsMine)
+        {
+            MakeScoreItems();
+        }
         Die();
+    }
+
+    private void MakeScoreItems()
+    {
+        var randomCount = UnityEngine.Random.Range(3, 5);
+        for (var i = 0; i < randomCount; ++i)
+        {
+            PhotonNetwork.Instantiate("ScoreItem", transform.position, Quaternion.identity);
+        }
     }
 }
