@@ -10,8 +10,6 @@ public class ItemObject : MonoBehaviourPun
         var pv = other.GetComponent<PhotonView>();
         if (!pv.IsMine) return;
         
-        Debug.Log("아이템 충돌!");
-            
         ScoreManager.Instance.AddScore(100);
             
         ItemObjectFactory.Instance.RequestDelete(base.photonView.ViewID);

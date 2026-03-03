@@ -27,6 +27,12 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         Refresh();
     }
 
+    public void HalveScore()
+    {
+        _score /= 2;
+        Refresh();
+    }
+    
     private void Refresh()
     {
         var hashtable = new Hashtable();
@@ -37,6 +43,17 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties.TryGetValue("score", out var scoreObj))
+            {
+                _scores[player.ActorNumber] = new ScoreData()
+                {
+                    Nickname = player.NickName,
+                    Score = (int)scoreObj
+                };
+            }
+        }
         Refresh();
     }
 

@@ -71,13 +71,11 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
     {
         if (stream.IsWriting)
         {
-            Debug.Log("데이터 전송 중...");
             stream.SendNext(Stat.Health);
             stream.SendNext(Stat.Stamina);
         }
         else if (stream.IsReading)
         {
-            Debug.Log("데이터 수신 중...");
             Stat.Health = (float)stream.ReceiveNext();
             Stat.Stamina = (float)stream.ReceiveNext();
         }
@@ -122,6 +120,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         if (PhotonView.IsMine)
         {
             ItemObjectFactory.Instance.RequestMakeScoreItems(transform.position);
+            ScoreManager.Instance.HalveScore();
         }
         Die();
     }

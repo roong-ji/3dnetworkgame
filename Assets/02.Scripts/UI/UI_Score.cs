@@ -22,12 +22,16 @@ public class UI_Score : MonoBehaviour
     {
         var scores = ScoreManager.Instance.Scores;
 
-        var scoresData = scores.Values.ToList();
-        scoresData.Sort();
+        var scoresData = scores.Values.OrderByDescending(d => d.Score).ToList();
         
         for (int i = 0; i < _items.Count; ++i)
         {
-            if (i > 2) return;
+            if (i >= scoresData.Count)
+            {
+                _items[i].Hide();
+                continue;
+            }
+            
             var data = scoresData[i];
             _items[i].Set(data.Nickname, data.Score);
         }
