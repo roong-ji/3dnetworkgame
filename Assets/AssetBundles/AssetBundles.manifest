@@ -1,0 +1,15 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.3.9f1
+CRC: 122063661
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: unifiedraytracing
+      Dependencies: {}
+    Info_1:
+      Name: character.male
+      Dependencies: {}
+    Info_2:
+      Name: character.female
+      Dependencies: {}

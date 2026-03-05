@@ -40,21 +40,11 @@ public class PhotonServerManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("로비 접속 완료!");
-        Debug.Log(PhotonNetwork.InLobby);
-
-        PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log($"랜덤 방 입장에 실패했습니다: {returnCode} - {message}");
-        
-        var roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 20;
-        roomOptions.IsVisible = true;
-        roomOptions.IsOpen = true;
-
-        PhotonNetwork.CreateRoom("test", roomOptions);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
