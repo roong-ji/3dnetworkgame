@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -48,6 +49,11 @@ public class UI_Lobby : MonoBehaviour
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
 
+        var customProps = new Hashtable();
+        customProps.Add("MasterName", nickname);
+        roomOptions.CustomRoomProperties = customProps;
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { "MasterName" };
+        
         PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
     

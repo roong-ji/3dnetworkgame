@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UI_RoomItem : MonoBehaviour
 {
+    public TMP_InputField NameInputField;
     public TextMeshProUGUI NameTextUI;
     public TextMeshProUGUI MaskNickNameTextUI;
     public TextMeshProUGUI PlayerCountTextUI;
@@ -24,7 +25,7 @@ public class UI_RoomItem : MonoBehaviour
         _roomInfo = roomInfo;
         
         NameTextUI.SetText(roomInfo.Name);
-        MaskNickNameTextUI.SetText("roongji");
+        MaskNickNameTextUI.SetText(roomInfo.CustomProperties["MasterName"].ToString());
         PlayerCountTextUI.SetText($"{roomInfo.PlayerCount} / {roomInfo.MaxPlayers}");
     }
 
@@ -32,6 +33,7 @@ public class UI_RoomItem : MonoBehaviour
     {
         if (_roomInfo == null) return;
         
+        PhotonNetwork.NickName = NameInputField.text;
         PhotonNetwork.JoinRoom(_roomInfo.Name);
     }
 }

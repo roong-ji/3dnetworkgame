@@ -33,7 +33,7 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         _room = PhotonNetwork.CurrentRoom;
-
+        
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel("BattleScene");
