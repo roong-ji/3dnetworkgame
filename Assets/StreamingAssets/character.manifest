@@ -1,16 +1,16 @@
 ManifestFileVersion: 0
 UnityVersion: 6000.3.9f1
-CRC: 2292148781
+CRC: 2895164168
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c118a85705cd8f56584cc588370f8630
+    Hash: 4116f401ddc2cac768799c1806912ee0
   TypeTreeHash:
     serializedVersion: 2
     Hash: 7961ba617f6c20bc7fd15246f9dd4ec4
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: b5e4e208dc5754cdfd3e80f6bc5a1b06
+    Hash: 8113f7c6ffc2b2161ec2cb060b03bf8c
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -149,5 +149,6 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
+- Assets/03.Prefabs/Female.prefab
 - Assets/03.Prefabs/Male.prefab
 Dependencies: []

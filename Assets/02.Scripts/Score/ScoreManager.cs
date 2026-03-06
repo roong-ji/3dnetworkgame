@@ -20,6 +20,19 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Instance = this;
+        
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties.TryGetValue("score", out var scoreObj))
+            {
+                _scores[player.ActorNumber] = new ScoreData()
+                {
+                    Nickname = player.NickName,
+                    Score = (int)scoreObj
+                };
+            }
+        }
+        Refresh();
     }
 
     public void AddScore(int score)
@@ -40,22 +53,6 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         hashtable.Add("score", _score);
         
         PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
-    }
-
-    public override void OnJoinedRoom()
-    {
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            if (player.CustomProperties.TryGetValue("score", out var scoreObj))
-            {
-                _scores[player.ActorNumber] = new ScoreData()
-                {
-                    Nickname = player.NickName,
-                    Score = (int)scoreObj
-                };
-            }
-        }
-        Refresh();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)

@@ -5,14 +5,10 @@ using Photon.Realtime;
 public class PhotonServerManager : MonoBehaviourPunCallbacks
 {
     private string _version = "0.0.1";
-    private string _nickname = "roongji";
 
     private void Start()
     {
-        _nickname += $"_{Random.Range(100, 999)}";
-
         PhotonNetwork.GameVersion = _version;
-        PhotonNetwork.NickName = _nickname;
         
         PhotonNetwork.SendRate          = 30; // 얼마나 자주 데이터를 송수신할 것인가..  (실제 송수신)
         PhotonNetwork.SerializationRate = 30; // 얼마나 자주 데이터를 직렬화 할 것인지.  (송수신 준비)

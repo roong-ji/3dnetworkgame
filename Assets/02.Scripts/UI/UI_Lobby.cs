@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -7,18 +8,30 @@ using UnityEngine.UI;
 
 public class UI_Lobby : MonoBehaviour
 {
-    public GameObject MalePrefab;
-    public GameObject FemalePrefab;
-
     public TMP_InputField NameInputField;
     public TMP_InputField RoomInputField;
     public Button CreateRoomButton;
+    public Button MaleButton;
+    public Button FemaleButton;
     
-    private CharacterType _characterType;
+    public AssetBundleManager BundleManager;
+    public Transform CharacterAnchor;
+    private GameObject CurrentCharacter;
 
+    private const string BundleName = "character";
+    
     private void Awake()
     {
         CreateRoomButton.onClick.AddListener(MakeRoom);
+        MaleButton.onClick.AddListener(OnClickMale);
+        FemaleButton.onClick.AddListener(OnClickFemale);
+        
+        BundleManager.DownloadBundleAsync(BundleName).Forget();
+    }
+
+    private void OnDestroy()
+    {
+        BundleManager.UnloadBundle(BundleName);
     }
 
     private void MakeRoom()
@@ -38,15 +51,21 @@ public class UI_Lobby : MonoBehaviour
         PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
     
-    public void OnClickMale() => OnClickCharacterButton(CharacterType.Male);
-    public void OnClickFemale() => OnClickCharacterButton(CharacterType.Female);
+    private void OnClickMale() => OnClickCharacterButton(BundleName, "Male").Forget();
+    private void OnClickFemale() => OnClickCharacterButton(BundleName, "Female").Forget();
 
-    private void OnClickCharacterButton(CharacterType characterType)
+    private async UniTask OnClickCharacterButton(string bundleName, string assetName)
     {
-        _characterType = characterType;
+        var character = await BundleManager.LoadAssetAsync(bundleName, assetName, CharacterAnchor);
         
-        MalePrefab.SetActive(_characterType == CharacterType.Male);
-        FemalePrefab.SetActive(_characterType == CharacterType.Female);
+        if (CurrentCharacter != null)
+        {
+            Destroy(CurrentCharacter);
+        }
+        
+        CurrentCharacter = character;
+        CurrentCharacter.transform.localPosition = Vector3.zero;
+        CurrentCharacter.transform.localRotation = Quaternion.identity;
     }
 }
 
