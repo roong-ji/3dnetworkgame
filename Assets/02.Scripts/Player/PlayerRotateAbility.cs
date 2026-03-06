@@ -36,8 +36,8 @@ public class PlayerRotateAbility : PlayerAbility
         var filteredX = Mathf.Abs(_lookInput.x) > InputSpikeThreshold ? 0f : _lookInput.x;
         var filteredY = Mathf.Abs(_lookInput.y) > InputSpikeThreshold ? 0f : _lookInput.y;
 
-        _mx += filteredX * _owner.Stat.RotationSpeed * Time.deltaTime;
-        _my += filteredY * _owner.Stat.RotationSpeed * Time.deltaTime;
+        _mx += filteredX * _owner.Stat.RotationSpeed;
+        _my += filteredY * _owner.Stat.RotationSpeed;
         
         _my = Mathf.Clamp(_my, MinVerticalAngle, MaxVerticalAngle);
         

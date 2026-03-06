@@ -2512,7 +2512,7 @@ MonoBehaviour:
     MoveSpeed: 5
     RunSpeed: 15
     JumpPower: 2.5
-    RotationSpeed: 100
+    RotationSpeed: 0.9
     AttackSpeed: 0.6
     Stamina: 5
     MaxStamina: 5
