@@ -4,7 +4,6 @@ using UnityEngine;
 public class BearBT : BT
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 3f;
     public float chaseSpeed = 5f;
     public float rotationSpeed = 10f;
 
@@ -12,15 +11,28 @@ public class BearBT : BT
     public float detectRange = 10f;
     public float attackRange = 1.5f;
 
-    private CharacterController _controller;
-    private Animator _animator;
     private Transform _target;
+    private BearController _bearController;
+    private float _lastAttackTime = -999f;
+
+    private void Awake()
+    {
+        _bearController = GetComponent<BearController>();
+        _bearController.OnDeath += HandleOnDeath;
+    }
+
+    private void OnDestroy()
+    {
+        _bearController.OnDeath -= HandleOnDeath;
+    }
+
+    private void HandleOnDeath()
+    {
+        enabled = false;
+    }
 
     protected override Node SetupTree()
     {
-        _controller = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
-
         // 플레이어 스캔
         Node scanTarget = new ActionNode(() => {
             _target = FindNearestPlayer();
@@ -79,7 +91,23 @@ public class BearBT : BT
 
     private State PerformAttack()
     {
-        _animator.SetTrigger("Attack1");
+        if (Time.time - _lastAttackTime < _bearController.Stat.AttackCooldown)
+        {
+            // 공격 대기 중 어색하게 뛰지 않도록 달리기 모션을 끕니다. (Combat Idle로 전환 유도)
+            _bearController.SetAnimBool("Run Forward", false);
+            return State.Running;
+        }
+
+        _lastAttackTime = Time.time;
+        _bearController.TriggerAnim("Attack1");
+
+        // 조건 노드에서 이미 사거리 체크를 했으므로 무조건 데미지 적용
+        if (_target.TryGetComponent<IDamageable>(out var damageable))
+        {
+            var attackPower = _bearController.Stat.AttackPower;
+            damageable.TakeDamage(attackPower, -1);
+        }
+
         return State.Success;
     }
 
@@ -109,15 +137,15 @@ public class BearBT : BT
     private State PerformChase()
     {
         if (_target == null) return State.Failure;
+        
         MoveTowards(_target.position, chaseSpeed);
-        _animator.SetBool("Run Forward", true);
+        _bearController.SetAnimBool("Run Forward", true);
         return State.Running;
     }
 
     private State PerformWander()
     {
-        // 간단한 산책 로직 (여기선 예시로 가만히 있게 처리하거나 랜덤 방향 이동)
-        _animator.Rebind();
+        _bearController.RebindAnim();
         return State.Running;
     }
 
@@ -131,12 +159,13 @@ public class BearBT : BT
         if (direction != Vector3.zero)
         {
             Quaternion targetRot = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+            _bearController.RotateBody(targetRot, rotationSpeed);
         }
 
-        // CharacterController 이동 (중력 포함)
+        // 중력을 포함한 이동 제어 위임
         Vector3 velocity = direction * speed;
         velocity.y = Physics.gravity.y; 
-        _controller.Move(velocity * Time.deltaTime);
+        
+        _bearController.MoveBody(velocity);
     }
 }
