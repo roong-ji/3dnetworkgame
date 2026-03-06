@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class BearBT : BT
 {
@@ -13,22 +14,19 @@ public class BearBT : BT
 
     private Transform _target;
     private BearController _bearController;
+    private PhotonView _photonView;
     private float _lastAttackTime = -999f;
 
     private void Awake()
     {
+        _photonView = GetComponent<PhotonView>();
         _bearController = GetComponent<BearController>();
-        _bearController.OnDeath += HandleOnDeath;
     }
 
-    private void OnDestroy()
-    {
-        _bearController.OnDeath -= HandleOnDeath;
-    }
-
-    private void HandleOnDeath()
-    {
-        enabled = false;
+    protected override void Update()
+    { 
+        if (_bearController.Stat.IsDead || !_photonView.IsMine) return;
+        base.Update();
     }
 
     protected override Node SetupTree()
@@ -93,7 +91,6 @@ public class BearBT : BT
     {
         if (Time.time - _lastAttackTime < _bearController.Stat.AttackCooldown)
         {
-            // 공격 대기 중 어색하게 뛰지 않도록 달리기 모션을 끕니다. (Combat Idle로 전환 유도)
             _bearController.SetAnimBool("Run Forward", false);
             return State.Running;
         }
@@ -145,7 +142,7 @@ public class BearBT : BT
 
     private State PerformWander()
     {
-        _bearController.RebindAnim();
+        _bearController.SetAnimBool("Run Forward", false);
         return State.Running;
     }
 

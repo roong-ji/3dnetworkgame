@@ -56,6 +56,12 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
 
     public void OnPlayerDeath(int attackerActorNumber, string victimNickName)
     {
+        if (attackerActorNumber == -1)
+        {
+            OnPlayerDied?.Invoke("Bear", victimNickName);
+            return;
+        }
+        
         var attackerName = _room.Players[attackerActorNumber].NickName;
         OnPlayerDied?.Invoke(attackerName, victimNickName);
     }

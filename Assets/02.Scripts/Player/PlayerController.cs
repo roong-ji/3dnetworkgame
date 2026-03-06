@@ -106,8 +106,13 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         return ability as T;
     }
 
-    [PunRPC]
     public void TakeDamage(float damage, int attackActorNubmer)
+    {
+        PhotonView.RPC(nameof(RpcTakeDamage), RpcTarget.All, damage, attackActorNubmer);
+    }
+
+    [PunRPC]
+    private void RpcTakeDamage(float damage, int attackActorNumber)
     {
         if (Stat.IsDead) return;
 
@@ -116,7 +121,7 @@ public class PlayerController : MonoBehaviour, IPunObservable, IDamageable
         if (Stat.Health > 0f) return;
         
         var victimNickname = PhotonView.Owner.NickName;
-        PhotonRoomManager.Instance.OnPlayerDeath(attackActorNubmer, victimNickname);
+        PhotonRoomManager.Instance.OnPlayerDeath(attackActorNumber, victimNickname);
         if (PhotonView.IsMine)
         {
             ItemObjectFactory.Instance.RequestMakeScoreItems(transform.position);

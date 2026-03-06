@@ -13,7 +13,7 @@ public abstract class BT : MonoBehaviour
         _root = SetupTree();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         _root?.Evaluate();
     }
