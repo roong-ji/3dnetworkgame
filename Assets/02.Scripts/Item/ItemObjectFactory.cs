@@ -40,7 +40,6 @@ public class ItemObjectFactory : MonoBehaviour
         }
     }
 
-
     public void RequestDelete(int viewId)
     {
         if (PhotonNetwork.IsMasterClient)
