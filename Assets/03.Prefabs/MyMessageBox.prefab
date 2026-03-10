@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 1637684233338724873}
   - component: {fileID: 3474315357264062940}
   - component: {fileID: 2620232668843763922}
+  - component: {fileID: 2238185400231027780}
   m_Layer: 5
   m_Name: MyMessageBox
   m_TagString: Untagged
@@ -174,6 +175,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &2238185400231027780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117800344117144750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb654f15bf9e20c408af6468880072ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_ChatMessage
+  Type: 0
+  NicknameTextUI: {fileID: 0}
+  MessageTextUI: {fileID: 8093321773270553815}
+  DataTimeTextUI: {fileID: 358610365249347127}
 --- !u!1 &5047341305400370552
 GameObject:
   m_ObjectHideFlags: 0

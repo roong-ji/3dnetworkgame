@@ -903,6 +903,7 @@ GameObject:
   - component: {fileID: 801015706}
   - component: {fileID: 801015708}
   - component: {fileID: 801015707}
+  - component: {fileID: 801015709}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -970,6 +971,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801015705}
   m_CullTransparentMesh: 1
+--- !u!114 &801015709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801015705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2edb82651f7b734fac90c9e6cd03428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_Chat
+  MinePrefab: {fileID: 2238185400231027780, guid: 91e5a0202f6160f4ca2eba7dfe8af874, type: 3}
+  OtherPrefab: {fileID: 1334823252951565642, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
+  SystemPrefab: {fileID: 302836904350185454, guid: 94f81f6511dc2e44ab9762332d4f5808, type: 3}
+  InputField: {fileID: 841941593}
+  MemberCountText: {fileID: 1768499177}
+  ContentTransform: {fileID: 1161016352}
 --- !u!224 &826650710 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8753334730832967791, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
@@ -1965,6 +1984,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768499175}
   m_CullTransparentMesh: 1
+--- !u!1 &1897024526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897024528}
+  - component: {fileID: 1897024527}
+  m_Layer: 0
+  m_Name: ChatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1897024527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897024526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2360fa8ed997ec4b8a1c69842d52311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChatManager
+--- !u!4 &1897024528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897024526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 123.16379, y: 0.00003, z: 6570.718}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1948019260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,3 +2659,4 @@ SceneRoots:
   - {fileID: 618465315}
   - {fileID: 1441776199}
   - {fileID: 10429532}
+  - {fileID: 1897024528}
