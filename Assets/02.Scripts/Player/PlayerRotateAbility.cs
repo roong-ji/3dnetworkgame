@@ -13,10 +13,21 @@ public class PlayerRotateAbility : PlayerAbility
     private float _mx;
     private float _my;
     private Vector2 _lookInput;
+
+    private bool _inputMode = true;
     
     public void OnLook(InputValue value)
     {
         _lookInput = value.Get<Vector2>();
+    }
+
+    public void OnEsc(InputValue value)
+    {
+        if (!value.isPressed) return;
+    
+        _inputMode = !_inputMode;
+        Cursor.lockState = _inputMode ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !_inputMode; 
     }
 
     private void Start()
@@ -31,7 +42,7 @@ public class PlayerRotateAbility : PlayerAbility
 
     private void Update()
     {
-        if (!_owner.PhotonView.IsMine) return;
+        if (!_owner.PhotonView.IsMine || !_inputMode) return;
         
         var filteredX = Mathf.Abs(_lookInput.x) > InputSpikeThreshold ? 0f : _lookInput.x;
         var filteredY = Mathf.Abs(_lookInput.y) > InputSpikeThreshold ? 0f : _lookInput.y;

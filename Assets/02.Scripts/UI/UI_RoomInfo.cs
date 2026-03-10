@@ -1,4 +1,5 @@
 using System;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,6 +36,7 @@ public class UI_RoomInfo : MonoBehaviour
 
     private void ExitRoom()
     {
-        
+        _roomExitButton.interactable = false;
+        PhotonNetwork.LeaveRoom();
     }
 }

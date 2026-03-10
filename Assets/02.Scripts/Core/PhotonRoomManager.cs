@@ -41,6 +41,11 @@ public class PhotonRoomManager : MonoBehaviourPunCallbacks
         
         OnChanged?.Invoke();
     }
+    
+    public override void OnLeftRoom()
+    {
+        PhotonNetwork.LoadLevel("LobbyScene");
+    }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
