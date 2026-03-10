@@ -14,7 +14,8 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     private ChatClient _chatClient;
 
     public event Action OnDataChanged;
-
+    public event Action<int> OnUserCountChanged;
+    
     private readonly List<Chat> _chats = new();
     public IReadOnlyList<Chat> Chats => _chats;
     
@@ -61,7 +62,6 @@ public class ChatManager : MonoBehaviour, IChatClientListener
         Debug.Log("[Photon Chat] 서버에 연결 해제됐습니다.");
     }
 
-
     // 2. 채널 입장/퇴장
     public void OnSubscribed(string[] channels, bool[] results)
     {
@@ -72,7 +72,7 @@ public class ChatManager : MonoBehaviour, IChatClientListener
 
         foreach (var channel in _chatClient.PublicChannels)
         {
-            // 여기서 내가 구동중인 채널 목록을 알 수 있다.
+            UpdateUserCount(channel.Key);
         }
     }
 
@@ -89,11 +89,21 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     public void OnUserSubscribed(string channel, string user)
     {
         Debug.Log($"[Photon Chat] 채널 {channel}에 {user} 입장!");
+        UpdateUserCount(channel);
     }
 
     public void OnUserUnsubscribed(string channel, string user)
     {
         Debug.Log($"[Photon Chat] 채널 {channel}에 {user} 퇴장!");
+        UpdateUserCount(channel);
+    }
+    
+    private void UpdateUserCount(string channelName)
+    {
+        if (_chatClient.PublicChannels.TryGetValue(channelName, out var channel))
+        {
+            OnUserCountChanged?.Invoke(channel.Subscribers.Count);
+        }
     }
     
     // 친구/팔로우 리스트 중 특정 유저가 상태 변경 시

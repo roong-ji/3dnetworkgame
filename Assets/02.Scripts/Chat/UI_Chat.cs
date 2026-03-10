@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using WebSocketSharp;
 
 public class UI_Chat : MonoBehaviour
 {
@@ -16,15 +18,20 @@ public class UI_Chat : MonoBehaviour
     private List<UI_ChatMessage> _chatMessageUI = new();
 
     public Transform ContentTransform;
-
+    public ScrollRect ScrollRect;
+    
     private void Start()
     {
         ChatManager.Instance.OnDataChanged += Refresh;
+        ChatManager.Instance.OnUserCountChanged += UpdateUserCountUI;
+        InputField.onSubmit.AddListener(OnSendMessage);
     }
 
     private void OnDestroy()
     {
         ChatManager.Instance.OnDataChanged -= Refresh;
+        ChatManager.Instance.OnUserCountChanged -= UpdateUserCountUI;
+        InputField.onSubmit.AddListener(OnSendMessage);
     }
 
     public void Refresh()
@@ -58,16 +65,25 @@ public class UI_Chat : MonoBehaviour
             chatMessage.Set(chat);
             _chatMessageUI.Add(chatMessage);
         }
+        
+        ScrollRect.verticalNormalizedPosition = 0f;
+    }
+
+    public void OnSendMessage(string text)
+    {
+        if (string.IsNullOrEmpty(text)) return;
+        ChatManager.Instance.SendChatMessage(text);
+        InputField.text = string.Empty;
     }
     
     public void OnClickSendButton()
     {
         var text = InputField.text;
-
-        if (string.IsNullOrEmpty(text)) return;
-        
-        ChatManager.Instance.SendChatMessage(text);
-        
-        InputField.text = string.Empty;
+        OnSendMessage(text);
+    }
+    
+    private void UpdateUserCountUI(int count)
+    {
+        MemberCountText.text = count.ToString();
     }
 }

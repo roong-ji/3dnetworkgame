@@ -11,6 +11,10 @@ public class PlayerVoiceAbility : PlayerAbility
     private void Start()
     {
         _recorder = FindAnyObjectByType<Recorder>();
+
+        _recorder.VoiceDetection = true;
+        _recorder.VoiceDetectionThreshold = 0.01f;
+        _recorder.VoiceDetectionDelayMs = 300;
     }
     
     private void Update()

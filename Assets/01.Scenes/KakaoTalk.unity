@@ -989,6 +989,7 @@ MonoBehaviour:
   InputField: {fileID: 841941593}
   MemberCountText: {fileID: 1768499177}
   ContentTransform: {fileID: 1161016352}
+  ScrollRect: {fileID: 87616627}
 --- !u!224 &826650710 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8753334730832967791, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
@@ -2110,7 +2111,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1948019263}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 801015709}
+        m_TargetAssemblyTypeName: UI_Chat, Assembly-CSharp
+        m_MethodName: OnClickSendButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1948019263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,11 +2428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2944450432078903652, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 163.33499
+      value: 80.195
       objectReference: {fileID: 0}
     - target: {fileID: 2944450432078903652, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -55.42
+      value: -35.61
       objectReference: {fileID: 0}
     - target: {fileID: 6130389635192140639, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2511,7 +2524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8753334730832967791, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -261.26
+      value: -241.45
       objectReference: {fileID: 0}
     - target: {fileID: 8753334730832967791, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2608,7 +2621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2813282302899844183, guid: 94f81f6511dc2e44ab9762332d4f5808, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -416.76498
+      value: -377.145
       objectReference: {fileID: 0}
     - target: {fileID: 2813282302899844183, guid: 94f81f6511dc2e44ab9762332d4f5808, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
