@@ -1433,7 +1433,7 @@ MonoBehaviour:
     m_Top: 20
     m_Bottom: 20
   m_ChildAlignment: 7
-  m_Spacing: 50
+  m_Spacing: 75
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -2511,7 +2511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8753334730832967791, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -236.26
+      value: -261.26
       objectReference: {fileID: 0}
     - target: {fileID: 8753334730832967791, guid: 1e2255e25ef0c6f44ad3758ebecf53ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2608,7 +2608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2813282302899844183, guid: 94f81f6511dc2e44ab9762332d4f5808, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -366.76498
+      value: -416.76498
       objectReference: {fileID: 0}
     - target: {fileID: 2813282302899844183, guid: 94f81f6511dc2e44ab9762332d4f5808, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
